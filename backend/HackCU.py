@@ -95,10 +95,10 @@ class Question:
     
     
 class Lesson:
-    def __init__(self, title):
+    def __init__(self, title, topics = [], subtitle = ""):
         self.title = title # lesson title
-        self.topics = [] # list of Topics
-        self.subtitle = "" # subtitle/general topic of lesson  
+        self.topics = topics # list of Topics
+        self.subtitle = subtitle # subtitle/general topic of lesson  
         
     def runLesson(self):
         # loop through each topic
@@ -111,8 +111,9 @@ class Lesson:
                 if type(obj) is Question:
                     # ask the question
                     askQuestion(obj) # would also display answers
+                    self.correct = False
                     #TODO: add way to get whether user answered correctly
-                    if True:
+                    if self.correct == True:
                         currNode = currNode.left # go to left if correct
                     else:
                         if type(currNode.right.value) is RepeatingHint: # if at last level of depth
@@ -142,6 +143,9 @@ class Lesson:
     
     def resetTitle(self, title):
         self.title = title
+        
+    def setCorrect(self, correct):
+        self.correct = correct
         
     def editTopic(self, index, newTopic = None):
         if newTopic is None:
