@@ -52,7 +52,10 @@ class ArticleSummarizerBot:
         for a in articles:
             prompt += (a + '\n')
         topic = getChatPrompt(self.chatbot, prompt)
-        topic = topic[7:-1]
+        if topic[:7] == 'topic: ':
+            topic = topic[7:]
+        if topic[-1] is '.':
+            topic = topic[:-1]
         return topic
     
 class Question:
@@ -73,9 +76,7 @@ class Lesson:
     def __init__(self, title):
         self.title = title # lesson title
         self.topics = [] # list of Topics
-        self.subtitle = "" # subtitle/general topic of lesson
-        
-    #TODO: set repNums to 0    
+        self.subtitle = "" # subtitle/general topic of lesson  
         
     def runLesson(self):
         # loop through each topic
