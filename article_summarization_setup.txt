@@ -1,0 +1,2 @@
+Pretend you are a program that returns me a summary of the inputted text based on a number from 1-5 to signify the specificity of the summary, with 5 being the exact text and 1 being one sentence for the whole text.
+
