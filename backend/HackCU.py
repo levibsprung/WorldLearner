@@ -10,6 +10,18 @@ def getChatPrompt(chatbot, prompt):
         # message = data["message"][len(prev_text) :]
         prev_text = data["message"] # keeps updating the message as the bot returns text (maybe not optimal)
     return prev_text
+
+def askQuestion(question):
+    return question
+
+def showHint(hint):
+    return hint
+
+def showAnswerIndex(question):
+    return question.correct
+
+def showSnippet(snippet):
+    return snippet
     
 # class with article summarization functionality
 class ArticleSummarizerBot:
@@ -72,6 +84,16 @@ class Question:
             return True
         return False  
     
+    def setQuestion(self, question):
+        self.question = question
+        
+    def setAnswers(self, answers):
+        self.answers = answers
+        
+    def setCorrect(self, correct):
+        self.correct = correct
+    
+    
 class Lesson:
     def __init__(self, title):
         self.title = title # lesson title
@@ -88,43 +110,64 @@ class Lesson:
                 obj = currNode.value
                 if type(obj) is Question:
                     # ask the question
-                    print(obj.question) # would also display answers
-                    answer = 0 # some way to get answer from frontend
-                    if answer == obj.correct:
+                    askQuestion(obj) # would also display answers
+                    #TODO: add way to get whether user answered correctly
+                    if True:
                         currNode = currNode.left # go to left if correct
                     else:
                         if type(currNode.right.value) is RepeatingHint: # if at last level of depth
                             # print hint
-                            print(obj.hints[obj.repNum])
+                            showHint(obj) # this would be taken care of on the frontend
                             # go to next hint
-                            if (obj.repNum < len(obj.hints) - 1):
-                                obj.repNum += 1
-                            else:
-                                print("The correct answer is: " + obj.answers[obj.correct] + ".") # if there are no more hints 
-                                break
+                            # if (obj.repNum < len(obj.hints) - 1):
+                            #     obj.repNum += 1
+                            # else:
+                            #     showAnswer(obj) # if there are no more hints 
+                            #     break
                         # go to right if wrong
                         currNode = currNode.right
                 # display snippet if string
                 elif type(obj) is str:
-                    print(obj)
+                    showSnippet(obj)
                     currNode = currNode.left
                 else: # obj would be null
-                    print("Good job!")
+                    showSnippet("done")
                     break
-                    
+        
+    def addTopic(self, topic):
+        self.topics.append(topic)
+        
+    def setSubtitle(self, subtitle):
+        self.subtitle = subtitle
+    
+    def resetTitle(self, title):
+        self.title = title
+        
+    def editTopic(self, index, newTopic = None):
+        if newTopic is None:
+            self.topics.remove(index)
+        else:
+            self.topics[index] = newTopic
             
 class RepeatingHint:
     # list of hints and current index
-    def __init__(self):
+    def __init__(self, hints = []):
         self.repNum = 0
-        self.hints = []
+        self.hints = hints
         
     def addHint(self, hint):
         self.hints.append(hint)
+        
+    def editHint(self, index, newHint = None):
+        if newHint is None:
+            self.hints.remove(index)
+        else:
+            self.hints[index] = newHint
     
 
 class Topic:
     # this init method will take a very long time
+    #TODO: not sure how much I should have here
     def __init__(self, article, questions, firstObj):
         self.questions = [questions] # each question in topic (might be needed later )
         self.layout = Node(firstObj) # start of layout of sublesson
@@ -139,6 +182,7 @@ class Topic:
         
     # add object to layout
     def setLayout(self, obj, directionLeft = None, correct = True):
+        self.layout = Node(self.layout.value) # clears pointers
         # this will only run if we are at the root
         if directionLeft is None:
             self.leftLeaf = self.layout
@@ -163,3 +207,9 @@ class Topic:
            
     def addQuestion(self, question):
         self.questions.append(question)
+        
+    def editQuestion(self, index, newQuestion = None):
+        if newQuestion is None:
+            self.questions.remove(index)
+        else:
+            self.questions[index] = newQuestion
