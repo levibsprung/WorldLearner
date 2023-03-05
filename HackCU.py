@@ -14,9 +14,11 @@ def getChatPrompt(chatbot, prompt):
 # class with article summarization functionality
 class ArticleSummarizerBot:
     def __init__ (self, initFileName):
+        credentials = open("credentials.txt", "r")
+        
         self.chatbot = Chatbot(config={
-    "email": "sprung@mines.edu",
-    "password": "HelloWorld"
+    "email": credentials.readline(),
+    "password": credentials.readline()
 })
         # no setup message
         if initFileName is None:
