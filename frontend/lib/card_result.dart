@@ -4,8 +4,17 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:frontend/course_page.dart';
 import 'package:frontend/slide_right_page.dart';
 
+import 'lesson_page.dart';
+
 class CardResult extends StatefulWidget {
-  const CardResult({super.key});
+  final String title;
+  final String subtitle;
+
+  const CardResult({
+    super.key,
+    required this.title,
+    required this.subtitle,
+  });
 
   @override
   State<CardResult> createState() => _CardResultState();
@@ -26,7 +35,27 @@ class _CardResultState extends State<CardResult> {
         onTap: () {
           Navigator.push(
             context,
-            SlideRightRoute(page: CoursePage()),
+            SlideRightRoute(
+                page: LessonPage(
+              title: 'Pronouns',
+              lesson: Lesson(title: 'Pronouns', topics: [
+                Topic(
+                  title: 'Introduction',
+                  body: ['short', 'medium', 'longer', 'long'],
+                  questions: [
+                    Question('What is 0+2?', ['1', '2', '3', '4'], '2'),
+                    Question('What is 2+2?', ['1', '2', '3', '4'], '4')
+                  ],
+                ),
+                Topic(
+                  title: 'Specificities',
+                  body: ['short', 'medium', 'longer', 'long'],
+                  questions: [
+                    Question('What is 2+2?', ['1', '2', '3', '4'], '4')
+                  ],
+                )
+              ]),
+            )),
           );
         },
         child: AnimatedContainer(
@@ -41,20 +70,22 @@ class _CardResultState extends State<CardResult> {
             vertical: 10.0,
           ),
           duration: const Duration(milliseconds: 80),
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(
-              "Result",
-              style: TextStyle(
-                fontWeight: FontWeight.w700,
-                fontSize: 20.0,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                widget.title,
+                style: TextStyle(
+                  fontWeight: FontWeight.w700,
+                  fontSize: 20.0,
+                ),
               ),
-            ),
-            SizedBox(
-              height: 5.0,
-            ),
-            Text("SmallResult"),
-          ]),
+              SizedBox(
+                height: 5.0,
+              ),
+              Text(widget.subtitle),
+            ],
+          ),
         ),
       ),
     );

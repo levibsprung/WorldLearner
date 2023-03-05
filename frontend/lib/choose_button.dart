@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 class ChooseButton extends StatelessWidget {
   final String buttonTitle;
   final Function() onPressed;
+  final double minWidth;
 
   const ChooseButton({
     super.key,
     required this.buttonTitle,
     required this.onPressed,
+    this.minWidth = 0.0,
   });
 
   @override
@@ -22,6 +24,7 @@ class ChooseButton extends StatelessWidget {
         ),
       ),
       style: ButtonStyle(
+        minimumSize: MaterialStateProperty.all<Size>(Size(minWidth, 10)),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(18.0),

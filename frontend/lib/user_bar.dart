@@ -23,8 +23,16 @@ class UserBar extends StatelessWidget {
           // Text("Welcome, [username]"),
           // Icon(FeatherIcons.bell),
           SizedBox(width: 30.0),
-          Icon(FeatherIcons.bookOpen,
-              size: 36.0, color: Colors.blueGrey.shade600),
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, '/');
+            },
+            child: Icon(
+              FeatherIcons.bookOpen,
+              size: 36.0,
+              color: Colors.blueGrey.shade600,
+            ),
+          ),
           SizedBox(width: 37.0),
           TabButton(buttonTitle: 'Learn', selected: true),
           SizedBox(width: 22.0),
