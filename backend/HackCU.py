@@ -263,11 +263,11 @@ question2 = Question("What is the best thing to do if you don't know someone's p
 pronouns = Topic("pronouns_what_and_why.txt", [question1, question2])
 
 pronouns.setRoot(pronouns.summaries[2])
-pronouns.setLayout(question1)
-pronouns.setLayout(pronouns.summaries[3], False)
-pronouns.setLayout(question2, False)
+# pronouns.setLayout(question1)
+# pronouns.setLayout(pronouns.summaries[3], False)
+# pronouns.setLayout(question2, False)
 hint = RepeatingHint(["Remember, the goal of using correct pronouns is to make people feel respected and included.", "When you don't know someone's pronouns, you should ask them what they are."])
-pronouns.setLayout(hint, False, False) 
+# pronouns.setLayout(hint, False, False) 
 
 question1 = Question("What does it mean to be transgender?", ["People who identify with the gender they were assigned at birth", "People who are not a male or a female", "People who have undergone gender-affirming surgery", "People who identify as a different gender from the one assigned at birth"], 3)
 question2 = Question("Which of the following is a sexuality that is NOT encompassed by the term 'transgender'?", ["Cisgender", "Genderfluid", "Non-binary", "Agender",], 0)
@@ -275,11 +275,11 @@ question2 = Question("Which of the following is a sexuality that is NOT encompas
 aboutTrans = Topic("what_does_it_mean_to_be_trans.txt", [question1, question2])
 
 aboutTrans.setRoot(aboutTrans.summaries[2])
-aboutTrans.setLayout(question1)
-aboutTrans.setLayout(aboutTrans.summaries[3], False)
-aboutTrans.setLayout(question2, False)
+# aboutTrans.setLayout(question1)
+# aboutTrans.setLayout(aboutTrans.summaries[3], False)
+# aboutTrans.setLayout(question2, False)
 hint = RepeatingHint(["The definition of 'cisgender' is someone whose gender identity is the same as the sex they were assigned as at birth.", "Generally, transgender is a term which encompasses everyone who is not cisgender."])
-aboutTrans.setLayout(hint, False, False)
+# aboutTrans.setLayout(hint, False, False)
 
 pronouns.getOutput("pronouns_output.txt")
 aboutTrans.getOutput("about_trans_output.txt")
