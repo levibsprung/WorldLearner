@@ -103,37 +103,8 @@ class Lesson:
     def runLesson(self):
         # loop through each topic
         for topic in self.topics():
-            # root of topic's layout
-            currNode = topic.layout
-            while True:
-                # get value from node               
-                obj = currNode.value
-                if type(obj) is Question:
-                    # ask the question
-                    askQuestion(obj) # would also display answers
-                    self.correct = False
-                    #TODO: add way to get whether user answered correctly
-                    if self.correct == True:
-                        currNode = currNode.left # go to left if correct
-                    else:
-                        if type(currNode.right.value) is RepeatingHint: # if at last level of depth
-                            # print hint
-                            showHint(obj) # this would be taken care of on the frontend
-                            # go to next hint
-                            # if (obj.repNum < len(obj.hints) - 1):
-                            #     obj.repNum += 1
-                            # else:
-                            #     showAnswer(obj) # if there are no more hints 
-                            #     break
-                        # go to right if wrong
-                        currNode = currNode.right
-                # display snippet if string
-                elif type(obj) is str:
-                    showSnippet(obj)
-                    currNode = currNode.left
-                else: # obj would be null
-                    showSnippet("done")
-                    break
+            topic.runTopic()
+            
         
     def addTopic(self, topic):
         self.topics.append(topic)
@@ -208,6 +179,39 @@ class Topic:
         else:
             currNode.right = Node(obj)
             self.rightLeaf = currNode.right  
+            
+    def runTopic(self):
+        # root of layout
+        currNode = self.layout
+        while True:
+            # get value from node               
+            obj = currNode.value
+            if type(obj) is Question:
+                # ask the question
+                askQuestion(obj) # would also display answers
+                self.correct = False
+                #TODO: add way to get whether user answered correctly
+                if self.correct == True:
+                    currNode = currNode.left # go to left if correct
+                else:
+                    if type(currNode.right.value) is RepeatingHint: # if at last level of depth
+                        # print hint
+                        showHint(obj) # this would be taken care of on the frontend
+                        # go to next hint
+                        # if (obj.repNum < len(obj.hints) - 1):
+                        #     obj.repNum += 1
+                        # else:
+                        #     showAnswer(obj) # if there are no more hints 
+                        #     break
+                    # go to right if wrong
+                    currNode = currNode.right
+            # display snippet if string
+            elif type(obj) is str:
+                showSnippet(obj)
+                currNode = currNode.left
+            else: # obj would be null
+                showSnippet("done")
+                break
            
     def addQuestion(self, question):
         self.questions.append(question)
