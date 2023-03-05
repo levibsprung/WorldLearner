@@ -6,6 +6,7 @@ import 'package:frontend/login_page.dart';
 import 'package:frontend/realm/app_services.dart';
 import 'package:frontend/realm/realm_services.dart';
 import 'package:frontend/search_page.dart';
+import 'package:frontend/signup_page.dart';
 import 'package:frontend/welcome_page.dart';
 import 'package:provider/provider.dart';
 
@@ -59,7 +60,7 @@ class LearnerApp extends StatelessWidget {
             return PageRouteBuilder(
               settings:
                   settings, // Pass this to make popUntil(), pushNamedAndRemoveUntil(), works
-              pageBuilder: (_, __, ___) => SearchPage(title: 'a'),
+              pageBuilder: (_, __, ___) => SignupPage(title: 'a'),
               transitionsBuilder: (
                 BuildContext context,
                 Animation<double> animation,
