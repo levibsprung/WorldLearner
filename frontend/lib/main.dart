@@ -62,7 +62,7 @@ class LearnerApp extends StatelessWidget {
             return PageRouteBuilder(
               settings:
                   settings, // Pass this to make popUntil(), pushNamedAndRemoveUntil(), works
-              pageBuilder: (_, __, ___) => LessonPage(title: 'Belgium'),
+              pageBuilder: (_, __, ___) => SearchPage(title: "a"),
               transitionsBuilder: (
                 BuildContext context,
                 Animation<double> animation,

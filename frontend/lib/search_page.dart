@@ -16,11 +16,15 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
   final options = [
-    "Computer Science",
-    "Issue #45",
-    "Issue #46",
-    "Some cool issue"
+    "The joys of Rust",
+    "History of Belgium",
+    "Providing Emergency Care",
+    "Pronouns"
   ];
+
+  late final TextEditingController _ctrl;
+
+  List<String> chosenResults = [];
 
   String? chosenWord;
 
@@ -29,8 +33,29 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
     vsync: this,
   );
 
+  void generateSearchResults() {
+    // List<String> fin;
+
+    print('go!');
+    setState(() {
+      chosenResults = [];
+
+      for (final option in options) {
+        if (option.toLowerCase().contains(_ctrl.text.toLowerCase()) &&
+            chosenResults.length < 3) {
+          chosenResults.add(option);
+        }
+      }
+    });
+  }
+
   @override
   void initState() {
+    _ctrl = TextEditingController();
+
+    _ctrl.addListener(() {
+      generateSearchResults();
+    });
     super.initState();
   }
 
@@ -66,6 +91,19 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
                             if (str.isNotEmpty) {
                               _controller.animateTo(1.0,
                                   curve: Curves.easeInOut);
+
+                              setState(() {
+                                chosenResults = [];
+
+                                for (final option in options) {
+                                  if (option
+                                          .toLowerCase()
+                                          .contains(str.toLowerCase()) &&
+                                      chosenResults.length < 3) {
+                                    chosenResults.add(option);
+                                  }
+                                }
+                              });
                             } else {
                               _controller.animateTo(0.0,
                                   curve: Curves.easeInOut);
@@ -103,7 +141,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
                             return Opacity(
                                 opacity: _controller.value,
                                 child: Column(children: [
-                                  for (int i = 0; i < 3; i++)
+                                  for (int i = 0; i < chosenResults.length; i++)
                                     Transform.translate(
                                       offset: Offset(
                                           max(
@@ -111,10 +149,13 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
                                                   100.0 * (i + 1),
                                               0),
                                           0.0),
-                                      child: const Padding(
+                                      child: Padding(
                                         padding:
                                             EdgeInsets.symmetric(vertical: 5.0),
-                                        child: CardResult(),
+                                        child: CardResult(
+                                          title: chosenResults[i],
+                                          subtitle: 'Learning Module',
+                                        ),
                                       ),
                                     ),
                                 ]));
