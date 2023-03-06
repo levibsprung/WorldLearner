@@ -293,7 +293,7 @@ class _TopicState extends State<TopicPage> {
       );
     } else {
       return SizedBox(
-        height: 500.0,
+        height: 570.0,
         width: 700.0,
         child: Column(
           children: [
@@ -305,7 +305,7 @@ class _TopicState extends State<TopicPage> {
                 fontWeight: FontWeight.w600,
               ),
             ),
-            SizedBox(height: 60.0),
+            SizedBox(height: 30.0),
             QuestionWidget(
               question: widget.topic.questions[i].question,
               correctAnswer: widget.topic.questions[i].correctAnswer,
