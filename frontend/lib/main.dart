@@ -7,6 +7,7 @@ import 'package:frontend/question.dart';
 import 'package:frontend/realm/app_services.dart';
 import 'package:frontend/realm/realm_services.dart';
 import 'package:frontend/search_page.dart';
+import 'package:frontend/signup_page.dart';
 import 'package:frontend/welcome_page.dart';
 import 'package:provider/provider.dart';
 
