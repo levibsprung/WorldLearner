@@ -45,8 +45,9 @@ class _QuestionState extends State<QuestionWidget>
           widget.question,
           style: const TextStyle(
             fontFamily: "Schyler",
-            fontSize: 50.0,
+            fontSize: 35.0,
           ),
+          textAlign: TextAlign.center,
         ),
         for (final answer in widget.answers)
           Column(

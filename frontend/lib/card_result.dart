@@ -37,21 +37,43 @@ class _CardResultState extends State<CardResult> {
             context,
             SlideRightRoute(
                 page: LessonPage(
-              title: 'Pronouns',
-              lesson: Lesson(title: 'Pronouns', topics: [
+              title: 'Belgium',
+              lesson: Lesson(title: 'Belgium', topics: [
                 Topic(
-                  title: 'Introduction',
-                  body: ['short', 'medium', 'longer', 'long'],
+                  title: '<Cool Title>',
+                  body: [
+                    '<short explanation>',
+                    '<long explanation>',
+                    '<longer explanation>',
+                    '<longest explanation>',
+                  ],
                   questions: [
-                    Question('What is 0+2?', ['1', '2', '3', '4'], '2'),
-                    Question('What is 2+2?', ['1', '2', '3', '4'], '4')
+                    Question("What is 2+2?", ["4", "1", "90", "4"], "4"),
+                    Question(
+                        'What is 4+4?',
+                        [
+                          "8",
+                          "40",
+                          "r",
+                          "90",
+                        ],
+                        "8")
                   ],
                 ),
                 Topic(
-                  title: 'Specificities',
-                  body: ['short', 'medium', 'longer', 'long'],
+                  title: 'What Does it Mean?',
+                  body: [
+                    'Nice! You understand the lesson!',
+                    'Nice! You understand the lesson!',
+                    'Nice! You understand the lesson!',
+                    'Nice! You understand the lesson!'
+                  ],
                   questions: [
-                    Question('What is 2+2?', ['1', '2', '3', '4'], '4')
+                    Question(
+                      "What is the best programming languge?",
+                      ["Pascal", "Ruby", "Rust", "JavaScript"],
+                      "Rust",
+                    )
                   ],
                 )
               ]),
